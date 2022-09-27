@@ -5,20 +5,44 @@ using UnityEngine.Events;
 
 public class PauseMenu : MonoBehaviour
 {
-    public UnityEvent pause;
+    public static PauseMenu menuInstance { get; private set; } //singleton
+    private bool paused = false;
+    private GameObject pauseCanvas;
+
+    private void Start()
+    {
+        pauseCanvas = transform.GetChild(0).gameObject;
+    }
+    private void Awake()
+    {
+        //singleton check
+        if (menuInstance != null && menuInstance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            menuInstance = this;
+        }
+
+    }
     public void ToggleActive()
     {
-        if (gameObject.activeSelf)
+        if (paused)
         {
             Time.timeScale = 1;
-            gameObject.SetActive(false);
-            pause.Invoke();
+            pauseCanvas.SetActive(false);
+            PlayerController.PlayerInstance.ToggleControl();
+            CameraController.CameraInstance.ToggleControl();
+            paused = false;
         }
         else
         {
             Time.timeScale = 0;
-            gameObject.SetActive(true);
-            pause.Invoke();
+            pauseCanvas.SetActive(true);
+            PlayerController.PlayerInstance.ToggleControl();
+            CameraController.CameraInstance.ToggleControl();
+            paused = true;
         }
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController PlayerInstance { get; private set; } //singleton
-    public UnityEvent pauseEvent;
     public float speed = 1.0f;
     public float maxSpeed = 1.0f;
     public float dragFactor = 1.0f; //when over the max speed, drag is increased by a proportional amount
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour
     void OnPause()
     {
         //when escape is pressed, trigger event to the canvas UI
-        pauseEvent.Invoke();
+        PauseMenu.menuInstance.ToggleActive();
     }
 
     void OnCollisionExit(Collision collision)
