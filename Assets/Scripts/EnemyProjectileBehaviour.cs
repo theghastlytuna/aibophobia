@@ -8,7 +8,6 @@ public class EnemyProjectileBehaviour : MonoBehaviour
     public ParticleSystem emitter;
     private AudioSource sound;
     private Rigidbody rb;
-    private bool justSpawned = true; //so we don't get destroyed by the object we spawn next to
 
     // Start is called before the first frame update
     void Start()
@@ -43,13 +42,5 @@ public class EnemyProjectileBehaviour : MonoBehaviour
 
         //destroy projectile
         Destroy(gameObject);
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        //triggered just after we leave contact with the entity that spawned us
-        if (justSpawned)
-        {
-            justSpawned = false;
-        }
     }
 }

@@ -7,18 +7,16 @@ public class PlayerProjectileBehaviour : MonoBehaviour
     public float speed = 1.0f;
     public ParticleSystem emitter;
     private AudioSource sound;
-    private GameObject player;
     private Rigidbody rb;
     private bool justSpawned = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player");
         emitter = GetComponentInChildren<ParticleSystem>();
         rb = GetComponent<Rigidbody>();
         sound = GetComponent<AudioSource>();
-        Vector3 direction = Vector3.Normalize(player.transform.position - GetComponent<Transform>().position);
+        Vector3 direction = Vector3.Normalize(PlayerController.PlayerInstance.transform.position - GetComponent<Transform>().position);
         rb.AddForce(direction * speed, ForceMode.VelocityChange);
     }
 
@@ -28,13 +26,13 @@ public class PlayerProjectileBehaviour : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
+                PlayerController.PlayerInstance.alive = false;
                 collision.gameObject.BroadcastMessage("PlayerDeath");
                 collision.gameObject.SetActive(false);
                 emitter.Play();
             }
             else if (collision.gameObject.tag == "Enemy")
             {
-                //collision.gameObject.BroadcastMessage("EnemyDeath");
                 collision.gameObject.SetActive(false);
                 emitter.Play();
             }
@@ -50,6 +48,8 @@ public class PlayerProjectileBehaviour : MonoBehaviour
     }
     private void OnCollisionExit(Collision collision)
     {
+        //we need this because our projectile spawns on walls;
+        //but we can't just disable wall collision since we want the bullet to be destroyed on walls
         if (justSpawned)
         {
             justSpawned = false;
