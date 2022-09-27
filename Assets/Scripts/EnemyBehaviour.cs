@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public GameObject preFab;
+    public GameObject preFab; //bullet prefab
     public float fireRate;
     public float speed;
-    public float holdDistance;
+    public float holdDistance; //how far away the enemy should stop from the player
     private float coolDown;
-    private GameObject player;
+    //private GameObject player;
     private Rigidbody rb;
 
     // Start is called before the first frame update
@@ -25,6 +25,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         coolDown += Time.deltaTime;
 
+        //if we're off cooldown and the player is alive, shoot
         if (coolDown >= fireRate)
         {
             coolDown = 0;
@@ -40,6 +41,7 @@ public class EnemyBehaviour : MonoBehaviour
         Vector3 direction = new Vector3(0, 0, 0);
         float distance = 0;
 
+        //if player is alive, move towards them
         if (PlayerController.PlayerInstance.alive)
         {
             direction = Vector3.Normalize(PlayerController.PlayerInstance.transform.position - transform.position);
