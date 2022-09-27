@@ -310,6 +310,7 @@ MonoBehaviour:
   jumpForce: 3
   preFab: {fileID: 4309414169878946774, guid: 4c5f14fe487731348a476d2431acb596, type: 3}
   playerCamera: {fileID: 963194227}
+  alive: 1
 --- !u!114 &102164284
 MonoBehaviour:
   m_ObjectHideFlags: 0
