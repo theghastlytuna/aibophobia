@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawnerBehaviour : MonoBehaviour
 {
     public GameObject preFab;
+    private GameObject spawnedEnemy;
     public float spawnRate; //Seconds per spawn
     public int maxEnemyAlive; //Maximum enemies that are in the scene
     public int maxEnemySpawned; //Maximum enemies that can come from this spawner over one game
@@ -22,7 +23,9 @@ public class EnemySpawnerBehaviour : MonoBehaviour
         {
             cooldown = 0;
             enemySpawned++;
-            Instantiate(preFab, transform.position, transform.rotation);
+            spawnedEnemy = Instantiate(preFab, transform.position, transform.rotation);
+            //spawnedEnemy.GetComponent<EnemyBehaviour>().fireRate += Random.Range(-1.0f, 2.0f);
+            ObserverScript.ObserverInstance.subscribers.Add(spawnedEnemy);
         }
     }
 }

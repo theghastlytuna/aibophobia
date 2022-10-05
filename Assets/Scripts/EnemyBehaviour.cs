@@ -53,4 +53,9 @@ public class EnemyBehaviour : MonoBehaviour
             }
         }
     }
+
+    public void Jump()
+    {
+        rb.AddForce(Vector3.up * 100);
+    }
 }
