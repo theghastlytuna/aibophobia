@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShootManager : MonoBehaviour
 {
     public static ShootManager ManagerInstance { get; private set; } //singleton
-    bool activePowerup = true;
+    public bool activePowerup = false;
     bool startCast;
     public GameObject preFab; //bullet prefab
     public Camera playerCamera;
