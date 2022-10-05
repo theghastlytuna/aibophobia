@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private float movementX, movementY, movementZ;
-    private bool controlLocked = false;
+    public bool controlLocked = false;
     bool onFloor;
     bool startCast;
     public bool alive = true;
@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*
     void OnFire()
     {
         //when click and controls enabled, start raycast
@@ -67,7 +68,7 @@ public class PlayerController : MonoBehaviour
             startCast = true;
         }
     }
-
+    */
     void OnPause()
     {
         //when escape is pressed, trigger event to the canvas UI
@@ -109,6 +110,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * movementY * jumpForce, ForceMode.Impulse);
         }
 
+        /*
         int layerMask = 1 << 6; //only return a hit on layer 6 (walls)
 
         //since raycasting is a physics operation, it goes into fixed update
@@ -129,7 +131,7 @@ public class PlayerController : MonoBehaviour
             }
             startCast = false;
         }
-
+        */
         LimitSpeed();
     }
 
